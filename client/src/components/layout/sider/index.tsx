@@ -247,7 +247,8 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             sx={{
               justifyContent: "center",
               minWidth: 36,
-              color: "primary.contrastText",
+              color: "#808191",
+              marginLeft: '10px',
             }}
           >
             <Dashboard />
@@ -258,6 +259,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
               noWrap: true,
               fontSize: "16px",
               fontWeight: selectedKey === "/" ? "bold" : "normal",
+              marginLeft: '10px'
             }}
           />
         </ListItemButton>
