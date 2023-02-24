@@ -14,8 +14,8 @@ const AllProperties = () => {
 
   const allProperties = data?.data ?? [];
 
-  if (isLoading) return <Typography>Loading...</Typography>
-  if (isError) return <Typography>Error...</Typography>
+  if (isLoading) return <Typography>Loading...</Typography>;
+  if (isError) return <Typography>Error...</Typography>;
 
   return (
     <Box>
@@ -45,7 +45,7 @@ const AllProperties = () => {
         sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}
       >
         {allProperties.map((property) => (
-          <PropertyCard 
+          <PropertyCard
             key={property._id}
             id={property._id}
             title={property.title}
