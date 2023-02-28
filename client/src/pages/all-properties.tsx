@@ -149,13 +149,13 @@ const AllProperties = () => {
         mt="20px"
         sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}
       >
-        {allProperties.map((property) => (
+        {allProperties?.map((property) => (
           <PropertyCard
             key={property._id}
             id={property._id}
             title={property.title}
-            price={property.price}
             location={property.location}
+            price={property.price}
             photo={property.photo}
           />
         ))}
@@ -169,7 +169,7 @@ const AllProperties = () => {
           flexWrap="wrap"
         >
           <CustomButton
-            title="previous"
+            title="Previous"
             handleClick={() => setCurrent((prev) => prev - 1)}
             backgroundColor="#475be8"
             color="#fcfcfc"
@@ -186,7 +186,7 @@ const AllProperties = () => {
             </strong>
           </Box>
           <CustomButton
-            title="next"
+            title="Next"
             handleClick={() => setCurrent((prev) => prev + 1)}
             backgroundColor="#475be8"
             color="#fcfcfc"
