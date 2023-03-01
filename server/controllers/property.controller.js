@@ -29,8 +29,7 @@ const getAllProperties = async (req, res) => {
   try {
     const count = await Property.countDocuments({ query });
 
-    const properties = await Property
-      .find(query)
+    const properties = await Property.find(query)
       .limit(_end)
       .skip(_start)
       .sort({ [_sort]: _order });
@@ -88,7 +87,31 @@ const createProperty = async (req, res) => {
   }
 };
 
-const updateProperty = async (req, res) => {};
-const deleteProperty = async (req, res) => {};
+const updateProperty = async (req, res) => {
+  
+};
+
+const deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const propertyToDelete = await Property.findById({ _id: id }).populate('creator');
+
+    if (!propertyToDelete) throw new Error('Property not found');
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    propertyToDelete.remove({ session });
+    propertyToDelete.creator.allProperties.pull(propertyToDelete);
+
+    await propertyToDelete.creator.save({ session });
+    await session.commitTransaction();
+
+    res.status(200).json({ message: 'Property deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export { getAllProperties, getPropertyDetail, createProperty, updateProperty, deleteProperty };
